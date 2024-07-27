@@ -28,10 +28,17 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # -
+      #   name: Build and push
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     file: ./docker/links-extractor.yml
+      #     push: true
+      #     tags: evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }}, latest
+
       -
         name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          file: ./docker/links-extractor.yml
-          push: true
-          tags: evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }}, latest
+        run: |
+          docker build . -f docker/links-extractor.yml -t evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }} -t evansalda/links-extractor:latest
+          docker push evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }}
+          docker push evansalda/links-extractor:latest
