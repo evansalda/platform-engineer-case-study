@@ -10,7 +10,7 @@ replacements:
   - source:
       kind: ConfigMap
       name: env-config-map
-      fieldPath: data.IMAGE_TAG
+      fieldPath: data.TIMESTAMP
     targets:
       - select:
           kind: Deployment
