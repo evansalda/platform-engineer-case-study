@@ -24,4 +24,4 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         push: true
-        tag: evansalda/links-extractor:github-actions-$(date +%s)
+        tags: evansalda/links-extractor:github-actions-$(date +%s)
