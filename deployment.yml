@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: links-extractor-deployment
+  labels:
+    app: links-extractor
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: links-extractor
+  template:
+    metadata:
+      labels:
+        app: links-extractor
+    spec:
+      containers:
+      - name: links-extractor
+        image: evansalda/links-extractor:1.0
+        args:
+          - -u
+          - 'https://www.google.com'
+          - -u
+          - 'https://www.eventhubs.com'
+          - -o
+          - 'json'
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: 1
