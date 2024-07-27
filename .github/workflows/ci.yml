@@ -15,7 +15,7 @@ jobs:
 
       -
         name: set TIMESTAMP environment variable
-        run: echo "::set-env name=TIMESTAMP::$(date +'%Y%m%d.%H:%M:%S')"
+        run: echo "TIMESTAMP=$(date +'%Y%m%d.%H:%M:%S') >> "
 
       -
         name: Login to Docker Hub
