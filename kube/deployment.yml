@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: links-extractor
-        image: evansalda/links-extractor
+        image: evansalda/links-extractor:${IMAGE_TAG}
         args:
           - -u
           - 'https://www.google.com'
