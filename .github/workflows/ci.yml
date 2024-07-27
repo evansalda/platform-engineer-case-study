@@ -32,5 +32,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
+          file: ./docker/links-extractor.yml
           push: true
           tags: evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }}, latest
