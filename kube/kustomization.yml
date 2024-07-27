@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+  - name: env-config-map
+    envs:
+      - .env
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: env-config-map
+      fieldPath: data.IMAGE_TAG
+    targets:
+      - select:
+          kind: Deployment
+        fieldPaths:
+          - spec.template.spec.containers.[name=links-extractor].image
+        options:
+          delimiter: ":"
+          index: 1
+
+resources:
+  - deployment.yml
