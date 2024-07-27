@@ -22,11 +22,13 @@ def get_links(urls):
         result[str_url] = str_url_links # appending the current url as key and the associated links as value
     return(result)
 
+
 # Prints each link (absolute URL) found on each URL provided in the arguments
 def print_links_stdout(links_dict):
     for url in links_dict:
         for link in links_dict[url]:
             print(link)
+
 
 # Creates a JSON with each URL of as key and a list of relative paths extracted from the URL as value
 def print_links_json(links_dict):
@@ -45,6 +47,7 @@ def print_links_json(links_dict):
         pretty_links_dict[quoted_url] = paths
     print(pretty_links_dict)
 
+
 def main(urls, output):
     dict = get_links(urls)
     match output:
@@ -56,5 +59,6 @@ def main(urls, output):
             print_links_json(dict)
             while True:
                 time.sleep(1)
+
 
 main(urls_args, output_args)
