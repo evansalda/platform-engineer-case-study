@@ -39,6 +39,6 @@ jobs:
       -
         name: Build and push
         run: |
-          docker build . -f docker/links-extractor.yml -t evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }} -t evansalda/links-extractor:latest
+          docker build . -f .docker/links-extractor.yml -t evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }} -t evansalda/links-extractor:latest
           docker push evansalda/links-extractor:github-actions-${{ env.TIMESTAMP }}
           docker push evansalda/links-extractor:latest
