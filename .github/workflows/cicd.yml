@@ -44,8 +44,8 @@ jobs:
           image-ref: evansalda/links-extractor:${{ env.IMAGE_TAG }}
           format: table
           exit-code: 0
-          ignore-unfixed: true
-          severity: UNKNOWN,LOW,MEDIUM,CRITICAL,HIGH
+          ignore-unfixed: false
+          severity: CRITICAL,HIGH
 
   deploy:
     runs-on: ubuntu-latest
