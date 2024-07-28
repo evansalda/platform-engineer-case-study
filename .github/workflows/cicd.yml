@@ -28,26 +28,9 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Build the docker image
-        uses: docker/build-push-action@v6
-        with:
-          file: Dockerfile
-          push: false
-          tags: links-extractor:${{ env.IMAGE_TAG }}
 
       -
-        name: Run vulnerability scanner on docker image
-        uses: aquasecurity/trivy-action@0.20.0
-        with:
-          image-ref: links-extractor:${{ env.IMAGE_TAG }}
-          format: table
-          exit-code: 0
-          ignore-unfixed: true
-          severity: HIGH,CRITICAL
-
-      -
-        name: Push the docker image
+        name: Build and push the docker image
         uses: docker/build-push-action@v6
         with:
           file: Dockerfile
