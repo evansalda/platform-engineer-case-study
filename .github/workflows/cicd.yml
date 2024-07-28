@@ -29,10 +29,28 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       -
-        name: Build and push docker image
+        name: Build the docker image
         uses: docker/build-push-action@v6
         with:
-          file: ./docker/links-extractor.yml
+          file: Dockerfile
+          push: false
+          tags: evansalda/links-extractor:${{ env.IMAGE_TAG }}
+
+      -
+        name: Run vulnerability scanner on docker image
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: evansalda/links-extractor:${{ env.IMAGE_TAG }}
+          format: table
+          exit-code: 0
+          ignore-unfixed: true
+          severity: HIGH,CRITICAL
+
+      -
+        name: Push the docker image
+        uses: docker/build-push-action@v6
+        with:
+          file: Dockerfile
           push: true
           tags: evansalda/links-extractor:${{ env.IMAGE_TAG }}
 
@@ -60,5 +78,3 @@ jobs:
           IMAGE_TAG: ${{needs.build.outputs.image_tag}}
         run: |
           envsubst < kube/deployment.yml | kubectl apply -f -
-#          kubectl kustomize kube/  
-#          kubectl apply -f kube/deployment.yml

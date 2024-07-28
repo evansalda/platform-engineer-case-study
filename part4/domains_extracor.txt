@@ -1,7 +1,0 @@
-Method 1 :
-
-- cat urls.txt | tr '[:upper:]' '[:lower:]' | sed -e 's/http[a-z]*:\/\///g' -e 's/\.$//g' | grep -P '[a-z]*.com$' -o | sort | uniq
-
-Method 2 :
-
-- cut -d ":" -f 2 urls.txt | awk '{print tolower($0)}' | awk -F "//" '{print $1 $2}' | sed -e 's/\.$//g' | grep -P '[a-z]*.com$' -o | sort | uniq
